@@ -18,11 +18,11 @@ const userSchema = new mongoose.Schema(
       match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email'],
     },
     password: {
-      type: String,
-      required: [true, 'Password is required'],
-      minlength: [6, 'Password must be at least 6 characters'],
-      select: false, // never return password by default
-    },
+  type: String,
+  required: [true, 'Password is required'],
+  minlength: [8, 'Password must be at least 8 characters'],
+  select: false,
+},
     avatar: {
       url: { type: String, default: '' },
       publicId: { type: String, default: '' },
@@ -40,14 +40,21 @@ const userSchema = new mongoose.Schema(
       type: String,
       select: false,
     },
+    resetPasswordToken: {
+  type: String,
+  select: false,
+},
+resetPasswordExpires: {
+  type: Date,
+  select: false,
+},
   },
   { timestamps: true }
 );
 
 
 
-// Hash password before save
-// AFTER (fixed):
+
 userSchema.pre('save', async function () {
   if (!this.isModified('password')) return;
   this.password = await bcrypt.hash(this.password, 12);
@@ -58,11 +65,12 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-// Never leak password/refreshToken even if select() misused
 userSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.password;
   delete obj.refreshToken;
+  delete obj.resetPasswordToken;
+  delete obj.resetPasswordExpires;
   return obj;
 };
 

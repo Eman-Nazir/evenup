@@ -2,6 +2,9 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User.model.js';
 import AppError from '../utils/AppError.js';
 import env from '../config/env.js';
+import crypto from 'crypto';
+import { notifyPasswordReset } from './notification.service.js';
+
 
 export const generateTokens = (userId) => {
   const accessToken = jwt.sign({ id: userId }, env.JWT_SECRET, {
@@ -72,4 +75,39 @@ export const refreshAccessToken = async (incomingRefreshToken) => {
 
 export const logoutUser = async (userId) => {
   await User.findByIdAndUpdate(userId, { $unset: { refreshToken: 1 } });
+};
+
+
+
+
+export const forgotPassword = async (email) => {
+  const user = await User.findOne({ email });
+  if (!user) return;
+
+  const resetToken = crypto.randomBytes(32).toString('hex');
+  const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+
+  user.resetPasswordToken = hashedToken;
+  user.resetPasswordExpires = Date.now() + 15 * 60 * 1000; // 15 minutes
+  await user.save({ validateBeforeSave: false });
+
+  await notifyPasswordReset(user.email, { resetToken, name: user.name });
+};
+
+export const resetPassword = async (rawToken, newPassword) => {
+  const hashedToken = crypto.createHash('sha256').update(rawToken).digest('hex');
+
+  const user = await User.findOne({
+    resetPasswordToken: hashedToken,
+    resetPasswordExpires: { $gt: Date.now() },
+  }).select('+resetPasswordToken +resetPasswordExpires');
+
+  if (!user) {
+    throw new AppError('Reset link is invalid or has expired', 400);
+  }
+
+  user.password = newPassword;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpires = undefined;
+  await user.save();
 };

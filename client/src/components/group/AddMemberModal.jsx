@@ -1,26 +1,23 @@
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { Button, Input, Modal } from '../ui';
+import { useState } from 'react';
+import { Modal, Button } from '../ui';
+import FriendPicker from './FriendPicker';
+import Input from '../ui/Input';
 import { useAddMember } from '../../features/groups/useAddMember';
-
-const schema = z.object({
-  email: z.string().email('Enter a valid email'),
-});
 
 export default function AddMemberModal({ isOpen, onClose, groupId }) {
   const { mutate: addMember, isPending } = useAddMember(groupId);
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({ resolver: zodResolver(schema) });
+  const [manualEmail, setManualEmail] = useState('');
 
-  const onSubmit = ({ email }) => {
-    addMember(email, {
+  const handleAddFriend = (email) => {
+    addMember(email, { onSuccess: () => onClose() });
+  };
+
+  const handleAddManual = () => {
+    const trimmed = manualEmail.trim();
+    if (!trimmed) return;
+    addMember(trimmed, {
       onSuccess: () => {
-        reset();
+        setManualEmail('');
         onClose();
       },
     });
@@ -28,21 +25,30 @@ export default function AddMemberModal({ isOpen, onClose, groupId }) {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Add a member">
-      <p className="mb-4 text-sm text-slate-500">
-        The person must already have an EvenUp account to be added.
-      </p>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <Input
-          label="Email address"
-          type="email"
-          placeholder="friend@example.com"
-          error={errors.email?.message}
-          {...register('email')}
-        />
-        <Button type="submit" className="w-full" isLoading={isPending}>
-          Add to group
-        </Button>
-      </form>
+      <div className="space-y-4">
+        <div>
+          <label className="mb-1.5 block text-sm font-medium text-slate-700">
+            Add from your friends
+          </label>
+          <FriendPicker selectedEmails={[]} onToggle={handleAddFriend} />
+        </div>
+
+        <div>
+          <label className="mb-1.5 block text-sm font-medium text-slate-700">
+            Or add by email
+          </label>
+          <div className="flex gap-2">
+            <Input
+              placeholder="friend@example.com"
+              value={manualEmail}
+              onChange={(e) => setManualEmail(e.target.value)}
+            />
+            <Button type="button" isLoading={isPending} onClick={handleAddManual}>
+              Add
+            </Button>
+          </div>
+        </div>
+      </div>
     </Modal>
   );
 }

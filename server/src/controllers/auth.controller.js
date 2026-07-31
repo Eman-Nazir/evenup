@@ -49,3 +49,13 @@ export const logout = asyncHandler(async (req, res) => {
 export const getMe = asyncHandler(async (req, res) => {
   successResponse(res, 200, 'User fetched successfully', { user: req.user });
 });
+
+export const forgotPassword = asyncHandler(async (req, res) => {
+  await authService.forgotPassword(req.body.email);
+  successResponse(res, 200, 'If an account exists with this email, a reset link has been sent');
+});
+
+export const resetPassword = asyncHandler(async (req, res) => {
+  await authService.resetPassword(req.params.token, req.body.password);
+  successResponse(res, 200, 'Password reset successfully — you can now log in');
+});

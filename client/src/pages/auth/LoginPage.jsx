@@ -8,7 +8,7 @@ import { useLogin } from '../../features/auth/useLogin';
 
 const schema = z.object({
   email: z.string().email('Enter a valid email'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  password: z.string().min(1, 'Password is required'),
 });
 
 export default function LoginPage() {
@@ -37,13 +37,20 @@ export default function LoginPage() {
           error={errors.email?.message}
           {...register('email')}
         />
-        <Input
-          label="Password"
-          type="password"
-          placeholder="••••••••"
-          error={errors.password?.message}
-          {...register('password')}
-        />
+        <div>
+          <Input
+            label="Password"
+            type="password"
+            placeholder="••••••••"
+            error={errors.password?.message}
+            {...register('password')}
+          />
+          <div className="mt-1.5 text-right">
+            <Link to="/forgot-password" className="text-xs text-primary hover:underline">
+              Forgot password?
+            </Link>
+          </div>
+        </div>
         <Button type="submit" className="w-full" isLoading={isPending}>
           Log in
         </Button>

@@ -4,12 +4,14 @@ import { z } from 'zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Input } from '../../components/ui';
 import AuthLayout from '../../components/layout/AuthLayout';
+import PasswordStrengthChecklist from '../../components/auth/PasswordStrengthChecklist';
+import { passwordSchema } from '../../lib/validation';
 import { useSignup } from '../../features/auth/useSignup';
 
 const schema = z.object({
   name: z.string().min(2, 'Name is required').max(50),
   email: z.string().email('Enter a valid email'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  password: passwordSchema,
 });
 
 export default function SignupPage() {
@@ -18,8 +20,11 @@ export default function SignupPage() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
+
+  const passwordValue = watch('password') || '';
 
   const onSubmit = (values) => {
     signup(values, { onSuccess: () => navigate('/dashboard') });
@@ -44,13 +49,16 @@ export default function SignupPage() {
           error={errors.email?.message}
           {...register('email')}
         />
-        <Input
-          label="Password"
-          type="password"
-          placeholder="••••••••"
-          error={errors.password?.message}
-          {...register('password')}
-        />
+        <div>
+          <Input
+            label="Password"
+            type="password"
+            placeholder="••••••••"
+            error={errors.password?.message}
+            {...register('password')}
+          />
+          <PasswordStrengthChecklist password={passwordValue} />
+        </div>
         <Button type="submit" className="w-full" isLoading={isPending}>
           Create account
         </Button>
