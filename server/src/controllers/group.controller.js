@@ -67,3 +67,7 @@ export const exportLedger = asyncHandler(async (req, res) => {
   await generateGroupLedgerPdf(req.user._id, req.params.id, res);
 });
 
+export const updateGroup = asyncHandler(async (req, res) => {
+  const group = await groupService.updateGroupDetails(req.user._id, req.params.id, req.body);
+  successResponse(res, 200, 'Group updated successfully', { group });
+});

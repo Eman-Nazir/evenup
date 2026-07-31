@@ -10,5 +10,6 @@ export const useSimplifiedDebts = (groupId) => {
     },
     enabled: !!groupId,
     refetchOnWindowFocus: true, 
+    refetchInterval: 5000,
   });
 };

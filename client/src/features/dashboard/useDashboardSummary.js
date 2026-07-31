@@ -8,5 +8,7 @@ export const useDashboardSummary = () => {
       const { data } = await api.get('/users/dashboard-summary');
       return data.data.summary;
     },
+    refetchOnWindowFocus: true,
+refetchInterval: 8000,
   });
 };

@@ -102,3 +102,23 @@ export const deleteGroup = async (userId, groupId) => {
   assertIsGroupAdmin(group, userId);
   await group.deleteOne();
 };
+
+
+export const updateGroupDetails = async (userId, groupId, { name, type, icon }) => {
+  const group = await Group.findById(groupId);
+  if (!group) throw new AppError('Group not found', 404);
+
+  const member = group.members.find((m) => m.user.equals(userId));
+  if (!member || member.role !== 'admin') {
+    throw new AppError('Only the group admin can edit group details', 403);
+  }
+
+  if (name !== undefined) group.name = name;
+  if (type !== undefined) group.type = type;
+  if (icon !== undefined) group.icon = icon;
+
+  await group.save();
+  return group.populate('members.user', 'name email avatar');
+};
+
+

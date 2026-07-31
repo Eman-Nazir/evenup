@@ -10,5 +10,6 @@ export const useSpendingByCategory = (groupId) => {
     },
     enabled: !!groupId,
     refetchOnWindowFocus: true,
+    refetchInterval: 8000, 
   });
 };

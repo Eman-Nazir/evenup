@@ -21,7 +21,6 @@ const friendshipSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Prevent duplicate friend requests between the same pair (in either direction)
 friendshipSchema.index({ requester: 1, recipient: 1 }, { unique: true });
 friendshipSchema.index({ recipient: 1, status: 1 });
 

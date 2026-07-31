@@ -12,7 +12,6 @@ export const sendFriendRequest = async (requesterId, recipientEmail) => {
     throw new AppError('You cannot send a friend request to yourself', 400);
   }
 
-  // Check if a friendship already exists in either direction
   const existing = await Friendship.findOne({
     $or: [
       { requester: requesterId, recipient: recipient._id },
@@ -70,7 +69,6 @@ export const getFriendsList = async (userId) => {
     .populate('requester', 'name email avatar')
     .populate('recipient', 'name email avatar');
 
-  // Normalize so we always return "the other person"
   return friendships.map((f) => {
     const friend = f.requester._id.equals(userId) ? f.recipient : f.requester;
     return { friendshipId: f._id, friend, since: f.updatedAt };

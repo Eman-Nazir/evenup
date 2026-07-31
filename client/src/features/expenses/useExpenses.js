@@ -10,5 +10,6 @@ export const useExpenses = (groupId, page = 1) => {
     },
     enabled: !!groupId,
     refetchOnWindowFocus: true,
+refetchInterval: 5000,
   });
 };

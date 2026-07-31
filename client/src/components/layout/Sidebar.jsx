@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { LayoutDashboard, Users, User, Shield, Sparkles } from 'lucide-react';
+import { LayoutDashboard, Users, User, Shield, Sparkles,UserPlus } from 'lucide-react';
 import clsx from 'clsx';
 import { useAuthStore } from '../../features/auth/useAuthStore';
 import { Avatar, Badge } from '../ui';
@@ -8,6 +8,7 @@ import { Avatar, Badge } from '../ui';
 const baseLinks = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/groups', label: 'Groups', icon: Users },
+  { to: '/friends', label: 'Friends', icon: UserPlus },
   { to: '/profile', label: 'Profile', icon: User },
 ];
 

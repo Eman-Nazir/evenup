@@ -15,6 +15,7 @@ const GroupDetailPage = lazy(() => import('../pages/groups/GroupDetailPage'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 const AdminDashboardPage = lazy(() => import('../pages/admin/AdminDashboardPage'));
 const ProfilePage = lazy(() => import('../pages/profile/ProfilePage'));
+const FriendsPage = lazy(() => import('../pages/friends/FriendsPage'));
 
 
 export default function AppRoutes() {
@@ -30,9 +31,10 @@ export default function AppRoutes() {
             <Route path="/groups" element={<GroupsPage />} />
             <Route path="/groups/:id" element={<GroupDetailPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/friends" element={<FriendsPage />} />
             <Route element={<AdminRoute />}>
-    <Route path="/admin" element={<AdminDashboardPage />} />
-  </Route>
+              <Route path="/admin" element={<AdminDashboardPage />} />
+            </Route>
           </Route>
         </Route>
 

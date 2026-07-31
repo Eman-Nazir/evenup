@@ -4,7 +4,7 @@ import { protect } from '../middlewares/auth.middleware.js';
 
 const router = Router();
 
-router.use(protect); // all friendship routes require auth
+router.use(protect);
 
 router.post('/request', friendshipController.sendRequest);
 router.patch('/request/:id', friendshipController.respondToRequest);

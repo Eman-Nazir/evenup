@@ -10,5 +10,6 @@ export const useGroupActivity = (groupId) => {
     },
     enabled: !!groupId,
     refetchOnWindowFocus: true,
+    refetchInterval: 5000,
   });
 };
