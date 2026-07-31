@@ -8,7 +8,8 @@ export const createGroupValidator = [
 ];
 
 export const addMemberValidator = [
-  body('email').trim().isEmail().withMessage('Please provide a valid email').normalizeEmail(),
+  body('email').trim().isEmail().withMessage('Please provide a valid email')
+  .normalizeEmail({ gmail_remove_subaddress: false, gmail_remove_dots: false }),
 ];
 
 

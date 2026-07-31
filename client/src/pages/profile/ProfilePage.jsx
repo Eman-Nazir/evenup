@@ -28,7 +28,13 @@ export default function ProfilePage() {
     defaultValues: { name: user?.name || '' },
   });
 
-  const onSubmit = (values) => updateProfile(values);
+ const onSubmit = (values) => {
+  updateProfile(values, {
+    onSuccess: () => {
+      reset(values); 
+    },
+  });
+};
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];

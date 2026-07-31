@@ -7,20 +7,28 @@ const strongPassword = body('password')
   .matches(/[0-9]/).withMessage('Password must contain at least one number')
   .matches(/[^a-zA-Z0-9]/).withMessage('Password must contain at least one special character');
 
+const emailNormalizeOptions = {
+  gmail_remove_subaddress: false,
+  gmail_remove_dots: false,
+};
+
 export const registerValidator = [
   body('name').trim().notEmpty().withMessage('Name is required')
     .isLength({ max: 50 }).withMessage('Name cannot exceed 50 characters'),
-  body('email').trim().isEmail().withMessage('Please provide a valid email').normalizeEmail(),
+  body('email').trim().isEmail().withMessage('Please provide a valid email')
+    .normalizeEmail(emailNormalizeOptions),
   strongPassword,
 ];
 
 export const loginValidator = [
-  body('email').trim().isEmail().withMessage('Please provide a valid email').normalizeEmail(),
+  body('email').trim().isEmail().withMessage('Please provide a valid email')
+    .normalizeEmail(emailNormalizeOptions),
   body('password').notEmpty().withMessage('Password is required'),
 ];
 
 export const forgotPasswordValidator = [
-  body('email').trim().isEmail().withMessage('Please provide a valid email').normalizeEmail(),
+  body('email').trim().isEmail().withMessage('Please provide a valid email')
+    .normalizeEmail(emailNormalizeOptions),
 ];
 
 export const resetPasswordValidator = [

@@ -8,5 +8,7 @@ export const useFriends = () => {
       const { data } = await api.get('/friendships');
       return data.data.friends;
     },
+    refetchOnWindowFocus: true,
+    refetchInterval: 5000,
   });
 };

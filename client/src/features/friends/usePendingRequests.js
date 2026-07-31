@@ -8,5 +8,7 @@ export const usePendingRequests = () => {
       const { data } = await api.get('/friendships/pending');
       return data.data.requests;
     },
+    refetchOnWindowFocus: true,
+    refetchInterval: 5000,
   });
 };

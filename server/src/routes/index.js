@@ -6,7 +6,6 @@ import expenseRoutes from './expense.routes.js';
 import settlementRoutes from './settlement.routes.js';
 import adminRoutes from './admin.routes.js';
 import userRoutes from './user.routes.js';
-import friendshipRoutes from './friendship.routes.js';
 
 const router = Router();
 router.use('/users', userRoutes);
