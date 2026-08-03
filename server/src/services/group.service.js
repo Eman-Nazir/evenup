@@ -1,6 +1,11 @@
 import Group from '../models/Group.model.js';
 import User from '../models/User.model.js';
 import AppError from '../utils/AppError.js';
+import Expense from '../models/Expense.model.js';
+import Split from '../models/Split.model.js';
+import Settlement from '../models/Settlement.model.js';
+
+
 
 export const createGroup = async (userId, { name, type, icon, memberEmails = [] }) => {
   const members = [{ user: userId, role: 'admin' }];
@@ -100,6 +105,13 @@ export const deleteGroup = async (userId, groupId) => {
   if (!group) throw new AppError('Group not found', 404);
 
   assertIsGroupAdmin(group, userId);
+
+  await Promise.all([
+    Expense.deleteMany({ group: groupId }),
+    Split.deleteMany({ group: groupId }),
+    Settlement.deleteMany({ group: groupId }),
+  ]);
+
   await group.deleteOne();
 };
 

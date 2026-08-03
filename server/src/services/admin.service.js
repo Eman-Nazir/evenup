@@ -3,6 +3,9 @@ import Group from '../models/Group.model.js';
 import Expense from '../models/Expense.model.js';
 import Settlement from '../models/Settlement.model.js';
 import AppError from '../utils/AppError.js';
+import Split from '../models/Split.model.js';
+
+
 
 export const getAllUsers = async ({ page = 1, limit = 20, search = '' } = {}) => {
   const skip = (page - 1) * limit;
@@ -58,10 +61,68 @@ export const getAllGroups = async ({ page = 1, limit = 20 } = {}) => {
   return { groups, pagination: { page, limit, total, totalPages: Math.ceil(total / limit) } };
 };
 
+
 export const deleteGroupAsAdmin = async (groupId) => {
   const group = await Group.findById(groupId);
   if (!group) throw new AppError('Group not found', 404);
+
+  await Promise.all([
+    Expense.deleteMany({ group: groupId }),
+    Split.deleteMany({ group: groupId }),
+    Settlement.deleteMany({ group: groupId }),
+  ]);
+
   await group.deleteOne();
+};
+
+export const deleteUser = async (adminId, targetUserId) => {
+  if (adminId.toString() === targetUserId) {
+    throw new AppError('You cannot delete your own account', 400);
+  }
+
+  const user = await User.findById(targetUserId);
+  if (!user) throw new AppError('User not found', 404);
+
+  await Group.updateMany(
+    { 'members.user': targetUserId },
+    { $pull: { members: { user: targetUserId } } }
+  );
+
+  await user.deleteOne();
+};
+
+export const getAllExpenses = async ({ page = 1, limit = 20 } = {}) => {
+  const skip = (page - 1) * limit;
+
+  const [expenses, total] = await Promise.all([
+    Expense.find()
+      .populate('group', 'name icon')
+      .populate('createdBy', 'name email')
+      .populate('paidBy.user', 'name')
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit),
+    Expense.countDocuments(),
+  ]);
+
+  return { expenses, pagination: { page, limit, total, totalPages: Math.ceil(total / limit) } };
+};
+
+export const getAllSettlements = async ({ page = 1, limit = 20 } = {}) => {
+  const skip = (page - 1) * limit;
+
+  const [settlements, total] = await Promise.all([
+    Settlement.find()
+      .populate('group', 'name icon')
+      .populate('from', 'name email')
+      .populate('to', 'name email')
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit),
+    Settlement.countDocuments(),
+  ]);
+
+  return { settlements, pagination: { page, limit, total, totalPages: Math.ceil(total / limit) } };
 };
 
 export const getPlatformStats = async () => {

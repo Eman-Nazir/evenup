@@ -33,3 +33,16 @@ export const getStats = asyncHandler(async (req, res) => {
   const stats = await adminService.getPlatformStats();
   successResponse(res, 200, 'Platform stats fetched successfully', { stats });
 });
+
+
+export const getExpenses = asyncHandler(async (req, res) => {
+  const { page = 1, limit = 20 } = req.query;
+  const result = await adminService.getAllExpenses({ page: +page, limit: +limit });
+  successResponse(res, 200, 'Expenses fetched successfully', result);
+});
+
+export const getSettlements = asyncHandler(async (req, res) => {
+  const { page = 1, limit = 20 } = req.query;
+  const result = await adminService.getAllSettlements({ page: +page, limit: +limit });
+  successResponse(res, 200, 'Settlements fetched successfully', result);
+});

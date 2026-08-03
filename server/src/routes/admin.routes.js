@@ -15,5 +15,8 @@ router.patch('/users/:id/role', updateRoleValidator, validate, adminController.u
 router.delete('/users/:id', adminController.deleteUser);
 router.get('/groups', adminController.getGroups);
 router.delete('/groups/:id', adminController.deleteGroup);
+router.get('/expenses', adminController.getExpenses);
+router.get('/settlements', adminController.getSettlements);
+
 
 export default router;

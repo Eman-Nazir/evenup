@@ -4,10 +4,10 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianG
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const statCards = [
-  { key: 'totalUsers', label: 'Total Users', icon: Users, color: 'text-blue-600 bg-blue-50' },
-  { key: 'totalGroups', label: 'Total Groups', icon: UsersRound, color: 'text-purple-600 bg-purple-50' },
-  { key: 'totalExpenses', label: 'Total Expenses', icon: Receipt, color: 'text-amber-600 bg-amber-50' },
-  { key: 'totalSettlements', label: 'Settlements', icon: HandCoins, color: 'text-green-600 bg-green-50' },
+  { key: 'totalUsers', label: 'Total Users', icon: Users, color: 'text-blue-600 bg-blue-50', tab: 'users' },
+  { key: 'totalGroups', label: 'Total Groups', icon: UsersRound, color: 'text-purple-600 bg-purple-50', tab: 'groups' },
+  { key: 'totalExpenses', label: 'Total Expenses', icon: Receipt, color: 'text-amber-600 bg-amber-50', tab: 'expenses' },
+  { key: 'totalSettlements', label: 'Settlements', icon: HandCoins, color: 'text-green-600 bg-green-50', tab: 'settlements' },
 ];
 
 export default function PlatformAnalytics({ stats }) {
