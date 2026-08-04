@@ -22,6 +22,8 @@ export default function ExpenseForm({ groupId, members, onSuccess, isEditMode = 
   const { mutate: updateExpense, isPending: isUpdating } = useUpdateExpense(groupId);
   const [splitData, setSplitData] = useState({ splitType: 'equal', splitDetails: [] });
   const [category, setCategory] = useState('');
+  const [isRecurring, setIsRecurring] = useState(false);
+  const [frequency, setFrequency] = useState('daily');
 
   const {
     register, handleSubmit, watch, reset, formState: { errors },
@@ -32,8 +34,6 @@ export default function ExpenseForm({ groupId, members, onSuccess, isEditMode = 
   const debouncedDescription = useDebounce(description, 600);
   const { data: suggestedCategory } = useCategorySuggestion(debouncedDescription);
 
-  // Single, unified submit handler — handles both add and edit modes,
-  // and shows the per-person split breakdown toast on success.
   const onSubmit = (values) => {
     const payload = {
       description: values.description,
@@ -41,6 +41,8 @@ export default function ExpenseForm({ groupId, members, onSuccess, isEditMode = 
       category: category || suggestedCategory || 'other',
       splitType: splitData.splitType,
       splitDetails: splitData.splitDetails,
+      isRecurring,
+      recurrence: isRecurring ? { frequency } : undefined,
     };
 
     if (isEditMode) {
@@ -112,6 +114,32 @@ export default function ExpenseForm({ groupId, members, onSuccess, isEditMode = 
       </div>
 
       <SplitTypeSelector members={members} amount={amount} onChange={setSplitData} />
+
+      <div className="rounded-lg border border-slate-200 p-3">
+        <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
+          <input
+            type="checkbox"
+            checked={isRecurring}
+            onChange={(e) => setIsRecurring(e.target.checked)}
+            className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary/30"
+          />
+          Make this recurring
+        </label>
+
+        {isRecurring && (
+          <div className="mt-2">
+            <select
+              value={frequency}
+              onChange={(e) => setFrequency(e.target.value)}
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+            >
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </div>
+        )}
+      </div>
 
       <Button type="submit" className="w-full" isLoading={isAdding || isUpdating}>
         {isEditMode ? 'Save changes' : 'Add expense'}

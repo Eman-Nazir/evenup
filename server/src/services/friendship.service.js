@@ -69,10 +69,12 @@ export const getFriendsList = async (userId) => {
     .populate('requester', 'name email avatar')
     .populate('recipient', 'name email avatar');
 
-  return friendships.map((f) => {
-    const friend = f.requester._id.equals(userId) ? f.recipient : f.requester;
-    return { friendshipId: f._id, friend, since: f.updatedAt };
-  });
+  return friendships
+    .filter((f) => f.requester && f.recipient)   
+    .map((f) => {
+      const friend = f.requester._id.equals(userId) ? f.recipient : f.requester;
+      return { friendshipId: f._id, friend, since: f.updatedAt };
+    });
 };
 
 export const getPendingRequests = async (userId) => {

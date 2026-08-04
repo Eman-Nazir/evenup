@@ -34,12 +34,12 @@ export const registerUser = async ({ name, email, password }) => {
 export const loginUser = async ({ email, password }) => {
   const user = await User.findOne({ email }).select('+password');
   if (!user) {
-    throw new AppError('Invalid email or password', 401);
+    throw new AppError('No account found with this email', 404);
   }
 
   const isMatch = await user.comparePassword(password);
   if (!isMatch) {
-    throw new AppError('Invalid email or password', 401);
+    throw new AppError('Incorrect password', 401);
   }
 
   const { accessToken, refreshToken } = generateTokens(user._id);
@@ -78,8 +78,6 @@ export const logoutUser = async (userId) => {
 };
 
 
-
-
 export const forgotPassword = async (email) => {
   const user = await User.findOne({ email });
   if (!user) return;
@@ -95,6 +93,8 @@ export const forgotPassword = async (email) => {
 };
 
 export const resetPassword = async (rawToken, newPassword) => {
+  console.log('RAW newPassword received on reset:', JSON.stringify(newPassword));
+
   const hashedToken = crypto.createHash('sha256').update(rawToken).digest('hex');
 
   const user = await User.findOne({
@@ -111,3 +111,5 @@ export const resetPassword = async (rawToken, newPassword) => {
   user.resetPasswordExpires = undefined;
   await user.save();
 };
+
+

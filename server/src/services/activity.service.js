@@ -36,6 +36,8 @@ export const getGroupActivity = async (userId, groupId, { limit = 30 } = {}) => 
       category: e.category,
       actor: e.createdBy,
       paidBy: e.paidBy,
+      isRecurring: e.isRecurring,          
+      recurrence: e.recurrence,  
       createdAt: e.createdAt,
     })),
     ...settlements.map((s) => ({

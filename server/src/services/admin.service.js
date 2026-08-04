@@ -143,8 +143,9 @@ export const getPlatformStats = async () => {
     totalExpenses,
     totalSettlements,
     expenseVolumeResult,
-    recentUsers,
+    recentUsersCount,
     usersByMonth,
+    recentUsers,
   ] = await Promise.all([
     User.countDocuments(),
     Group.countDocuments(),
@@ -167,6 +168,7 @@ export const getPlatformStats = async () => {
       { $sort: { "_id.year": 1, "_id.month": 1 } },
       { $limit: 12 },
     ]),
+    User.find().select("name email avatar").sort({ createdAt: -1 }).limit(5),
   ]);
 
   return {
@@ -175,10 +177,11 @@ export const getPlatformStats = async () => {
     totalExpenses,
     totalSettlements,
     totalExpenseVolume: expenseVolumeResult[0]?.total || 0,
-    newUsersThisWeek: recentUsers,
+    newUsersThisWeek: recentUsersCount,
     userGrowth: usersByMonth.map((u) => ({
       month: `${u._id.year}-${String(u._id.month).padStart(2, "0")}`,
       count: u.count,
     })),
+    recentUsers,
   };
 };
