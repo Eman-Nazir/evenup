@@ -3,7 +3,7 @@ import { processDueRecurringExpenses } from '../services/recurringExpense.servic
 import logger from '../utils/logger.js';
 
 export const startCronJobs = () => {
-  cron.schedule('*/5 * * * *', async () => {
+  cron.schedule('0 0 * * *', async () => {
     logger.info('Running recurring expenses check...');
     await processDueRecurringExpenses();
   });
