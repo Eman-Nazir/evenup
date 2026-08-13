@@ -7,6 +7,10 @@ import settlementRoutes from './settlement.routes.js';
 import adminRoutes from './admin.routes.js';
 import userRoutes from './user.routes.js';
 
+
+
+
+
 const router = Router();
 router.use('/users', userRoutes);
 router.use('/auth', authRoutes);
@@ -17,8 +21,6 @@ router.use('/settlements', settlementRoutes);
 router.use('/admin', adminRoutes);
 router.use('/friendships', friendshipRoutes);
 
-router.get('/', (req, res) => {
-  res.json({ success: true, message: 'EvenUp API is running' });
-});
+
 
 export default router;
