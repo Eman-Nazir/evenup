@@ -1,6 +1,6 @@
 <div align="center">
 
-<svg width="64" height="64" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#4F46E5" />
@@ -65,7 +65,9 @@ It also uses **Google Gemini AI** to read an expense's description and automatic
 
 ## 🎥 Demo
 
-![Demo](./docs/screenshots/demo.gif)
+<p align="center">
+  <img src="./docs/screenshots/demo.gif" width="800" alt="Demo walkthrough" />
+</p>
 
 *A quick walkthrough of group creation, adding an AI-categorized expense, and settling up.*
 
@@ -73,29 +75,48 @@ It also uses **Google Gemini AI** to read an expense's description and automatic
 
 ## 🖼️ Screenshots
 
-### Login
-![Login](./docs/screenshots/login.png)
-
-### Signup
-![Signup](./docs/screenshots/signup.png)
-
-### Dashboard
-![Dashboard](./docs/screenshots/dashboard.png)
-
-### Group Balance & Debt Simplification
-![Group Detail](./docs/screenshots/group-detail.png)
-
-### AI-Powered Expense Categorization
-![Add Expense](./docs/screenshots/add-expense.png)
-
-### Spending Insights
-![Insights](./docs/screenshots/insights.png)
-
-### Admin Dashboard
-![Admin Dashboard](./docs/screenshots/admin-dashboard.png.png)
-
-### Responsive / Mobile View
-![Mobile View](./docs/screenshots/mobile-view.png)
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <b>Login</b><br/>
+      <img src="./docs/screenshots/login.png" width="400" alt="Login" />
+    </td>
+    <td align="center" width="50%">
+      <b>Signup</b><br/>
+      <img src="./docs/screenshots/signup.png" width="400" alt="Signup" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <b>Dashboard</b><br/>
+      <img src="./docs/screenshots/dashboard.png" width="400" alt="Dashboard" />
+    </td>
+    <td align="center" width="50%">
+      <b>Group Balance & Debt Simplification</b><br/>
+      <img src="./docs/screenshots/group-detail.png" width="400" alt="Group Detail" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <b>AI-Powered Expense Categorization</b><br/>
+      <img src="./docs/screenshots/add-expense.png" width="400" alt="Add Expense" />
+    </td>
+    <td align="center" width="50%">
+      <b>Spending Insights</b><br/>
+      <img src="./docs/screenshots/insights.png" width="400" alt="Insights" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <b>Admin Dashboard</b><br/>
+      <img src="./docs/screenshots/admin-dashboard.png.png" width="400" alt="Admin Dashboard" />
+    </td>
+    <td align="center" width="50%">
+      <b>Responsive / Mobile View</b><br/>
+      <img src="./docs/screenshots/mobile-view.png" width="400" alt="Mobile View" />
+    </td>
+  </tr>
+</table>
 
 ---
 
