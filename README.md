@@ -1,4 +1,4 @@
-
+<div align="center">
 
 # 💸 EvenUp
 
@@ -28,12 +28,6 @@ It also uses **Google Gemini AI** to read an expense's description and automatic
 
 ---
 
-## 🌐 Live Project
-
-🔗 **[Live Demo Link](#)** — *(add your deployed link here)*
-
----
-
 ## ✨ Features
 
 - 🔐 **Secure Authentication** — JWT-based auth with httpOnly cookies, bcrypt password hashing, strong password policy with a live strength checklist, and a full forgot/reset password flow
@@ -52,61 +46,34 @@ It also uses **Google Gemini AI** to read an expense's description and automatic
 
 ---
 
-## 🎥 Demo
-
-<p align="center">
-  <img src="./docs/screenshots/demo.gif" width="800" alt="Demo walkthrough" />
-</p>
-
-*A quick walkthrough of group creation, adding an AI-categorized expense, and settling up.*
-
----
-
 ## 🖼️ Screenshots
 
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <b>Login</b><br/>
-      <img src="./docs/screenshots/login.png" width="400" alt="Login" />
-    </td>
-    <td align="center" width="50%">
-      <b>Signup</b><br/>
-      <img src="./docs/screenshots/signup.png" width="400" alt="Signup" />
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="50%">
-      <b>Dashboard</b><br/>
-      <img src="./docs/screenshots/dashboard.png" width="400" alt="Dashboard" />
-    </td>
-    <td align="center" width="50%">
-      <b>Group Balance & Debt Simplification</b><br/>
-      <img src="./docs/screenshots/group-detail.png" width="400" alt="Group Detail" />
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="50%">
-      <b>AI-Powered Expense Categorization</b><br/>
-      <img src="./docs/screenshots/add-expense.png" width="400" alt="Add Expense" />
-    </td>
-    <td align="center" width="50%">
-      <b>Spending Insights</b><br/>
-      <img src="./docs/screenshots/insights.png" width="400" alt="Insights" />
-    </td>
-  </tr>
-  <tr>
-    <td align="center" colspan="2">
-      <b>Admin Dashboard</b><br/>
-      <img src="./docs/screenshots/admin-dashboard.png.png" width="400" alt="Admin Dashboard" />
-    </td>
-  </tr>
-</table>
+### Dashboard
+![Dashboard](./screenshots/dashboard.png)
 
-<p align="center">
-  <b>Responsive / Mobile View</b><br/>
-  <img src="./docs/screenshots/mobile-view.png" width="260" alt="Mobile View" />
-</p>
+### Group Balance & Debt Simplification
+![Group Detail](./screenshots/group-detail.png)
+
+### AI-Powered Expense Categorization
+![Add Expense](./screenshots/add-expense.png)
+
+### Flexible Splitting
+![Split Types](./screenshots/split-types.png)
+
+### Admin Dashboard
+![Admin Dashboard](./screenshots/admin-dashboard.png)
+
+### Responsive Design
+![Mobile View](./screenshots/mobile-view.png)
+
+### Insights
+![Insights](./screenshots/insights.png)
+
+### Signup
+![Signup](./screenshots/signup.png)
+
+### Login
+![Login](./screenshots/login.png)
 
 ---
 
@@ -186,18 +153,16 @@ This separation keeps the money-critical logic (balance math) isolated in one pl
 
 ```
 evenup/
-├── docs/
-│   └── screenshots/           # README images + demo.gif
 ├── server/
 │   └── src/
-│       ├── config/            # DB, env, Cloudinary, mailer, cron setup
-│       ├── models/            # User, Group, Expense, Split, Settlement, Friendship
-│       ├── controllers/       # Request/response handlers
-│       ├── services/          # Business logic (balances, splits, debt algorithm)
-│       ├── routes/            # API route definitions
-│       ├── middlewares/       # Auth, admin, error handling, validation
-│       ├── utils/             # AppError, apiResponse, asyncHandler, logger
-│       └── validators/        # express-validator rule sets
+│       ├── config/          # DB, env, Cloudinary, mailer, cron setup
+│       ├── models/           # User, Group, Expense, Split, Settlement, Friendship
+│       ├── controllers/      # Request/response handlers
+│       ├── services/         # Business logic (balances, splits, debt algorithm)
+│       ├── routes/           # API route definitions
+│       ├── middlewares/      # Auth, admin, error handling, validation
+│       ├── utils/            # AppError, apiResponse, asyncHandler, logger
+│       └── validators/       # express-validator rule sets
 │
 └── client/
     └── src/
@@ -332,6 +297,14 @@ GET    /api/v1/admin/settlements
 
 ---
 
+## 🎥 Demo
+
+📺 [Watch the full video walkthrough](#)
+
+A ~2 minute walkthrough covering group creation, AI-assisted expense splitting across all four split types, live debt simplification, and the admin dashboard.
+
+---
+
 ## 🗺️ Known Limitations / Roadmap
 
 - No real payment gateway integration (Stripe/JazzCash) — "Settle Up" is intentionally a record-keeping action, not a real money transfer, matching how Splitwise's core product works
@@ -344,7 +317,7 @@ GET    /api/v1/admin/settlements
 ## 👤 Author
 
 **Eman Nazir**
-MERN Stack Developer · [LinkedIn](https://www.linkedin.com/in/eman-nazir-231145316/) · [GitHub](https://github.com/Eman-Nazir)
+MERN Stack Developer · [LinkedIn](https://www.linkedin.com/in/eman-nazir-231145316/) · [GitHub](ithub.com/Eman-Nazir)
 
 Built as part of a full-stack development challenge, focused on writing production-quality, well-tested business logic rather than just CRUD — with particular attention to correctness in the balance/debt calculations, since financial math has zero tolerance for silent bugs.
 
