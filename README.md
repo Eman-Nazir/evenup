@@ -1,15 +1,4 @@
-<div align="center">
 
-<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#4F46E5" />
-      <stop offset="100%" stop-color="#7C3AED" />
-    </linearGradient>
-  </defs>
-  <rect width="32" height="32" rx="8" fill="url(#grad)" />
-  <text x="16" y="22" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">E</text>
-</svg>
 
 # 💸 EvenUp
 
