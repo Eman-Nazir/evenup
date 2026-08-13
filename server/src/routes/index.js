@@ -17,4 +17,8 @@ router.use('/settlements', settlementRoutes);
 router.use('/admin', adminRoutes);
 router.use('/friendships', friendshipRoutes);
 
+router.get('/', (req, res) => {
+  res.json({ success: true, message: 'EvenUp API is running' });
+});
+
 export default router;
