@@ -46,6 +46,14 @@ It also uses **Google Gemini AI** to read an expense's description and automatic
 
 ---
 
+### 🎬 Demo
+
+<img src="./docs/demo.gif" alt="DevBoard Pro Demo" width="800" />
+
+**[Live Demo →](#)** *https://dev-board-kappa.vercel.app*
+
+
+
 🖼️ Screenshots
 <table> <tr> <td align="center" width="50%"> <b>Login</b><br/> <img src="./docs/screenshots/login.png" width="400" alt="Login" /> </td> <td align="center" width="50%"> <b>Signup</b><br/> <img src="./docs/screenshots/signup.png" width="400" alt="Signup" /> </td> </tr> <tr> <td align="center" width="50%"> <b>Dashboard</b><br/> <img src="./docs/screenshots/dashboard.png" width="400" alt="Dashboard" /> </td> <td align="center" width="50%"> <b>Group Balance & Debt Simplification</b><br/> <img src="./docs/screenshots/group-detail.png" width="400" alt="Group Detail" /> </td> </tr> <tr> <td align="center" width="50%"> <b>AI-Powered Expense Categorization</b><br/> <img src="./docs/screenshots/add-expense.png" width="400" alt="Add Expense" /> </td> <td align="center" width="50%"> <b>Spending Insights</b><br/> <img src="./docs/screenshots/insights.png" width="400" alt="Insights" /> </td> </tr> <tr> <td align="center" colspan="2"> <b>Admin Dashboard</b><br/> <img src="./docs/screenshots/admin-dashboard.png.png" width="400" alt="Admin Dashboard" /> </td> </tr> </table> <p align="center"> <b>Responsive / Mobile View</b><br/> <img src="./docs/screenshots/mobile-view.png" width="260" alt="Mobile View" /> </p>
 
