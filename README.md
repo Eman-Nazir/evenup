@@ -45,6 +45,8 @@ It also uses **Google Gemini AI** to read an expense's description and automatic
 
 ---
 <div align="center">
+
+  
 ### 🎬 Demo
 
 <img src="./docs/demo.gif" alt="DevBoard Pro Demo" width="800" />
