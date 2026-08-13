@@ -107,16 +107,17 @@ It also uses **Google Gemini AI** to read an expense's description and automatic
     </td>
   </tr>
   <tr>
-    <td align="center" width="50%">
+    <td align="center" colspan="2">
       <b>Admin Dashboard</b><br/>
       <img src="./docs/screenshots/admin-dashboard.png.png" width="400" alt="Admin Dashboard" />
     </td>
-    <td align="center" width="50%">
-      <b>Responsive / Mobile View</b><br/>
-      <img src="./docs/screenshots/mobile-view.png" width="400" alt="Mobile View" />
-    </td>
   </tr>
 </table>
+
+<p align="center">
+  <b>Responsive / Mobile View</b><br/>
+  <img src="./docs/screenshots/mobile-view.png" width="260" alt="Mobile View" />
+</p>
 
 ---
 
