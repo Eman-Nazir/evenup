@@ -1,28 +1,25 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 import env from '../config/env.js';
 import logger from '../utils/logger.js';
 
-// console.log("Gemini Key:", env.GEMINI_API_KEY);
-
-
-const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY);
+const genAI = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY });
 
 const VALID_CATEGORIES = [
   'food', 'rent', 'transport', 'entertainment', 'utilities', 'shopping', 'other',
 ];
 
-
 export const suggestCategory = async (description) => {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
-    
-
     const prompt = `Classify this expense description into exactly one of these categories: ${VALID_CATEGORIES.join(', ')}.
 Description: "${description}"
 Respond with ONLY the category word, nothing else, no punctuation, no explanation.`;
 
-    const result = await model.generateContent(prompt);
-    const text = result.response.text().trim().toLowerCase();
+    const result = await genAI.models.generateContent({
+      model: env.GEMINI_MODEL || 'gemini-flash-latest',
+      contents: prompt,
+    });
+
+    const text = result.text.trim().toLowerCase();
 
     return VALID_CATEGORIES.includes(text) ? text : 'other';
   } catch (error) {

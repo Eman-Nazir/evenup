@@ -10,13 +10,16 @@ export const useCreateSettlement = (groupId) => {
       const { data } = await api.post(`/settlements/group/${groupId}`, payload);
       return data;
     },
-    onSuccess: (data) => {
-  queryClient.invalidateQueries({ queryKey: ['balances', groupId] });
-  queryClient.invalidateQueries({ queryKey: ['simplifiedDebts', groupId] });
-  queryClient.invalidateQueries({ queryKey: ['settlements', groupId] });
-  queryClient.invalidateQueries({ queryKey: ['activity', groupId] });       
-  showSuccess(data.message);
-},
+    onSuccess: async (data) => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['balances', groupId] }),
+        queryClient.invalidateQueries({ queryKey: ['simplifiedDebts', groupId] }),
+        queryClient.invalidateQueries({ queryKey: ['settlements', groupId] }),
+        queryClient.invalidateQueries({ queryKey: ['activity', groupId] }),
+        queryClient.invalidateQueries({ queryKey: ['dashboardSummary'] }),
+      ]);
+      showSuccess(data.message);
+    },
     onError: (error) => showError(getErrorMessage(error)),
   });
 };
