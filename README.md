@@ -12,7 +12,7 @@ Built with the MERN stack — split bills the smart way, not the messy way.
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Gemini](https://img.shields.io/badge/AI-Google%20Gemini-4285F4?logo=googlegemini&logoColor=white)](https://ai.google.dev)
 
-[Live Demo](#) · [Video Walkthrough](https://www.loom.com/share/93f53623cf324b78ac46ff77dead38e0) · [Report a Bug](#)
+[Live Demo](https://evenup-iux1.vercel.app/login) · [Video Walkthrough](https://www.loom.com/share/93f53623cf324b78ac46ff77dead38e0) · [Report a Bug](#)
 
 </div>
 
